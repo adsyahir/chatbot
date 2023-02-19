@@ -287,7 +287,7 @@ include("includes/db.php");
 								// Access the 'question' property of the current object
 								var question = data[i].question;
 								var id = data[i].id;
-								$replay = '<li class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><li id=' +id+ 'class="question"><p>' + question + '</p></li></li>';
+								$replay = `<li class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><li id="${id}"  class="question"><p>${question}</p></li></li>`;
 
 								$(".form").append($replay);
 								// when chat goes down the scroll bar automatically comes to the bottom
