@@ -248,7 +248,7 @@ include("includes/db.php");
 				Design by Izat Shah
 			</div>
 		</div>
-	
+
 		<script>
 			$(document).ready(function() {
 				$(".question").on("click", function() {
@@ -258,6 +258,18 @@ include("includes/db.php");
 					$(".form").append($msg);
 					$("#data").val('');
 
+					$.ajax({
+						url: 'question_list.php',
+						type: 'POST',
+						success: function(result) {
+
+							var test = result.split(",")
+							console.log(test);
+
+						}
+					});
+
+
 					// start ajax code
 					$.ajax({
 						url: 'answer.php',
@@ -265,11 +277,11 @@ include("includes/db.php");
 						data: 'text=' + $value,
 						success: function(result) {
 							console.log(result);
-							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'  + result + '</p></div></div>';
+							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + result + '</p></div></div>';
 							$(".form").append($replay);
 							// when chat goes down the scroll bar automatically comes to the bottom
 							$(".form").scrollTop($(".form")[0].scrollHeight);
-							
+
 						}
 					});
 				});
@@ -277,3 +289,5 @@ include("includes/db.php");
 		</script>
 
 </footer>
+
+"["Here you bank acc",[["1","Where can i get bank account number?","Here you bank acc"],["2","Where can i contact an admin?","question 2"]]]"
