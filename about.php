@@ -7,6 +7,8 @@ include("includes/header.php");
 include("functions/functions.php");
 include("includes/main.php");
 include("includes/footer.php");
+include("chat_test.php");
+
 
 ?>
 

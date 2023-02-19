@@ -26,171 +26,6 @@ include("includes/db.php");
         cursor: pointer;
     }
 
-    ::selection {
-        color: #fff;
-        background: #007bff;
-    }
-
-    ::-webkit-scrollbar {
-        width: 3px;
-        border-radius: 25px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #ddd;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #ccc;
-    }
-
-    .wrapper {
-        width: 370px;
-        background: #fff;
-        border-radius: 5px;
-        border: 1px solid lightgrey;
-        border-top: 0px;
-    }
-
-    .wrapper .title {
-        background: #007bff;
-        color: #fff;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 60px;
-        text-align: center;
-        border-bottom: 1px solid #006fe6;
-        border-radius: 5px 5px 0 0;
-    }
-
-    .wrapper .form {
-        padding: 20px 15px;
-        min-height: 400px;
-        max-height: 400px;
-        overflow-y: auto;
-    }
-
-    .wrapper .form .inbox {
-        width: 100%;
-        display: flex;
-        align-items: baseline;
-    }
-
-    .wrapper .form .user-inbox {
-        justify-content: flex-end;
-        margin: 13px 0;
-    }
-
-    .wrapper .form .inbox .icon {
-        height: 40px;
-        width: 40px;
-        color: #fff;
-        text-align: center;
-        line-height: 40px;
-        border-radius: 50%;
-        font-size: 18px;
-        background: #007bff;
-    }
-
-    .wrapper .form .inbox .msg-header {
-        max-width: 53%;
-        margin-left: 10px;
-    }
-
-    .form .inbox .msg-header p {
-        color: #fff;
-        background: #007bff;
-        border-radius: 10px;
-        padding: 8px 10px;
-        font-size: 14px;
-        word-break: break-all;
-    }
-
-    .form .user-inbox .msg-header p {
-        color: #333;
-        background: #efefef;
-    }
-
-    .wrapper .typing-field {
-        display: flex;
-        height: 60px;
-        width: 100%;
-        align-items: center;
-        justify-content: space-evenly;
-        background: #efefef;
-        border-top: 1px solid #d9d9d9;
-        border-radius: 0 0 5px 5px;
-    }
-
-    .wrapper .typing-field .input-data {
-        height: 40px;
-        width: 335px;
-        position: relative;
-    }
-
-    .wrapper .typing-field .input-data input {
-        height: 100%;
-        width: 100%;
-        outline: none;
-        border: 1px solid transparent;
-        padding: 0 80px 0 15px;
-        border-radius: 3px;
-        font-size: 15px;
-        background: #fff;
-        transition: all 0.3s ease;
-    }
-
-    .typing-field .input-data input:focus {
-        border-color: rgba(0, 123, 255, 0.8);
-    }
-
-    .input-data input::placeholder {
-        color: #999999;
-        transition: all 0.3s ease;
-    }
-
-    .input-data input:focus::placeholder {
-        color: #bfbfbf;
-    }
-
-    .wrapper .typing-field .input-data button {
-        position: absolute;
-        right: 5px;
-        top: 50%;
-        height: 30px;
-        width: 65px;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
-        outline: none;
-        opacity: 0;
-        pointer-events: none;
-        border-radius: 3px;
-        background: #007bff;
-        border: 1px solid #007bff;
-        transform: translateY(-50%);
-        transition: all 0.3s ease;
-    }
-
-    .wrapper .typing-field .input-data input:valid~button {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .typing-field .input-data button:hover {
-        background: #006fef;
-    }
-
-
-    /*  */
-
-
-
-    /*  */
     li {
         list-style: none;
     }
@@ -253,8 +88,6 @@ include("includes/db.php");
 
     .chat-window {
         width: 400px;
-        height: 420px;
-
     }
 
     .chat-window p {
@@ -396,38 +229,229 @@ include("includes/db.php");
     .hide {
         opacity: 0 !important;
     }
-</style>
 
-<div class="lampiran">
+    #chat,
+    #chat:after,
+    .chatbox {
+        transition: all 0.4s ease-in-out;
+    }
+
+    #chat,
+    #close-chat,
+    .minim-button,
+    .maxi-button,
+    .chat-text {
+        font-weight: 700;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    #chat,
+    #close-chat {
+        border: 1px solid #a8a8a8;
+    }
+
+
+    .chatbox {
+        position: fixed;
+        bottom: 0;
+        left: 50px;
+        margin: 0 0 -1500px;
+        background: #fff;
+        border-bottom: none;
+        z-index: 100000;
+    }
+
+    #close-chat {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        font-size: 24px;
+        border: 1px solid #dedede;
+        width: 20px;
+        background: #fefefe;
+        z-index: 2;
+    }
+
+    #minim-chat,
+    #maxi-chat {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .minim-button {
+        position: absolute;
+        top: 2px;
+        right: 26px;
+        font-size: 24px;
+        border: 1px solid #dedede;
+        width: 20px;
+        background: #fefefe;
+    }
+
+    .maxi-button {
+        position: absolute;
+        top: 2px;
+        right: 26px;
+        font-size: 24px;
+        border: 1px solid #dedede;
+        width: 20px;
+        background: #fefefe;
+    }
+
+    .chat-text {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        font-size: 16px;
+    }
+
+    #chat {
+
+        position: fixed;
+        border-radius: 3px;
+        padding: 2px 8px;
+        font-size: 12px;
+        background: #fff;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        bottom: 80;
+        left: 100;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 500px 107px;
+    z-index: 1000;
+    }
+
+
+
+    #chat:hover {
+        background: #ddd;
+        -webkit-animation-name: hvr-pulse-grow;
+        animation-name: hvr-pulse-grow;
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;
+    }
+
+    #chat:hover:after {
+        border-color: #ddd transparent transparent !important;
+    }
+
+    .animated-chat {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    @-webkit-keyframes tada {
+        0% {
+            -webkit-transform: scale(1);
+        }
+
+        10%,
+        20% {
+            -webkit-transform: scale(0.9) rotate(-3deg);
+        }
+
+        30%,
+        50%,
+        70%,
+        90% {
+            -webkit-transform: scale(1.1) rotate(3deg);
+        }
+
+        40%,
+        60%,
+        80% {
+            -webkit-transform: scale(1.1) rotate(-3deg);
+        }
+
+        100% {
+            -webkit-transform: scale(1) rotate(0);
+        }
+    }
+
+    @keyframes tada {
+        0% {
+            transform: scale(1);
+        }
+
+        10%,
+        20% {
+            transform: scale(0.9) rotate(-3deg);
+        }
+
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        40%,
+        60%,
+        80% {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        100% {
+            transform: scale(1) rotate(0);
+        }
+    }
+
+    .tada {
+        -webkit-animation-name: tada;
+        animation-name: tada;
+    }
+
+    @-webkit-keyframes hvr-pulse-grow {
+        to {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes hvr-pulse-grow {
+        to {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    }
+</style>
+<div id="chat" class="animated-chat tada" onclick="loadChatbox()"><span>Chat</span></div>
+<div class="chatbox" id="chatbox">
     <div class="chat-window">
         <div class="chat-header">
             <p>Live Chat</p>
+            <div id="close-chat" onclick="closeChatbox()">&times;</div>
+            <div id="minim-chat" onclick="minimChatbox()"><span class="minim-button">&minus;</span></div>
+            <div id="maxi-chat" onclick="loadChatbox()"><span class="maxi-button">&plus;</span></div>
         </div>
         <div class="chat-body">
             <div class="message-container">
-                <!-- <div class="message" id="you">
-								<div>
-									<div class="message-content">
-										<p>asdasdas</p>
-									</div>
-									<div class="message-meta">
-										<p id="time">Thursday</p>
-										<p id="author">Me</p>
-									</div>
-								</div>
-							</div> -->
-                <!-- <div class="message" id="other">
-								<div>
-									<div class="message-content">
-										<p>asdasdas</p>
-									</div>
-									<div class="message-meta">
-										<p id="time">Thursday</p>
-										<p id="author">Me</p>
-									</div>
-								</div>
-							</div>
- -->
+
                 <?php
                 $result = mysqli_query($con, "SELECT * FROM chatbox");
                 $i = 1;
@@ -454,16 +478,10 @@ include("includes/db.php");
 						<button>&#9658;</button>
 					</div> -->
     </div>
+
 </div>
+
 <script>
-    $(document).ready(function() {
-        var adsasd = "adasd"
-
-
-    });
-
-
-
     $(document).on('click', '.question', function() {
         $value = $(this).val();
         $name = $(this).attr('id');
@@ -509,10 +527,37 @@ include("includes/db.php");
                     // when chat goes down the scroll bar automatically comes to the bottom
                     $(".message-container").scrollTop($(".message-container")[0].scrollHeight);
 
-
-
                 }
             }
         });
     });
+
+    var f = document.getElementById("chat");
+
+    function loadChatbox() {
+        var e = document.getElementById("minim-chat");
+        e.style.display = "block";
+        var e = document.getElementById("maxi-chat");
+        e.style.display = "none";
+        var e = document.getElementById("chatbox");
+        e.style.marginBottom = "100px";
+        f.style.display = 'none';
+
+    }
+
+    function closeChatbox() {
+        var e = document.getElementById("chatbox");
+        e.style.margin = "0 0 -1500px 0";
+        f.style.display = 'flex';
+    }
+
+    function minimChatbox() {
+        var e = document.getElementById("minim-chat");
+        e.style.display = "none";
+        var e = document.getElementById("maxi-chat");
+        e.style.display = "block";
+        var e = document.getElementById("chatbox");
+        e.style.margin = "0 0 -380px 0";
+        f.style.display = 'none';
+    }
 </script>
