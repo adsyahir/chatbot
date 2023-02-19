@@ -9,71 +9,71 @@ include("includes/main.php");
 
 ?>
 
-  <main>
-    <!-- HERO -->
-    <div class="nero">
-      <div class="nero__heading">
-        <span class="nero__bold">Forgot</span> password
-      </div>
-      <p class="nero__text">
-      </p>
+<main>
+  <!-- HERO -->
+  <div class="nero">
+    <div class="nero__heading">
+      <span class="nero__bold">Forgot</span> password
     </div>
-  </main>
+    <p class="nero__text">
+    </p>
+  </div>
+</main>
 
-<div id="content" ><!-- content Starts -->
-<div class="container" ><!-- container Starts -->
+<div id="content"><!-- content Starts -->
+  <div class="container"><!-- container Starts -->
 
-<div class="col-md-12" ><!--- col-md-12 Starts -->
+    <div class="col-md-12"><!--- col-md-12 Starts -->
 
-<ul class="breadcrumb" ><!-- breadcrumb Starts -->
+      <ul class="breadcrumb"><!-- breadcrumb Starts -->
 
-<li>
-<a href="index.php">Home</a>
-</li>
+        <li>
+          <a href="index.php">Home</a>
+        </li>
 
-<li>Register</li>
+        <li>Register</li>
 
-</ul><!-- breadcrumb Ends -->
-
-
-
-</div><!--- col-md-12 Ends -->
-
-
-<div class="col-md-12" ><!-- col-md-12 Starts -->
-
-<div class="box"><!-- box Starts -->
-
-<div class="box-header"><!-- box-header Starts -->
-
-<center>
-
-<h3> Enter Your Email Below , We Will Send You , Your Password </h3>
-
-</center>
-
-</div><!-- box-header Ends -->
-
-<div align="center"><!-- center div Starts -->
-
-<form action="" method="post"><!-- form Starts -->
-
-<input type="text" class="form-control" name="c_email" placeholder="Enter Your Email">
-
-<br>
-
-<input type="submit" name="forgot_pass" class="btn btn-primary" value="Send My Password">
-
-</form><!-- form Ends -->
-
-</div><!-- center div Ends -->
-
-</div><!-- box Ends -->
-
-</div><!-- col-md-12 Ends -->
+      </ul><!-- breadcrumb Ends -->
 
 
-</div><!-- container Ends -->
+
+    </div><!--- col-md-12 Ends -->
+
+
+    <div class="col-md-12"><!-- col-md-12 Starts -->
+
+      <div class="box"><!-- box Starts -->
+
+        <div class="box-header"><!-- box-header Starts -->
+
+          <center>
+
+            <h3> Enter Your Email Below , We Will Send You , Your Password </h3>
+
+          </center>
+
+        </div><!-- box-header Ends -->
+
+        <div align="center"><!-- center div Starts -->
+
+          <form action="" method="post"><!-- form Starts -->
+
+            <input type="text" class="form-control" name="c_email" placeholder="Enter Your Email">
+
+            <br>
+
+            <input type="submit" name="forgot_pass" class="btn btn-primary" value="Send My Password">
+
+          </form><!-- form Ends -->
+
+        </div><!-- center div Ends -->
+
+      </div><!-- box Ends -->
+
+    </div><!-- col-md-12 Ends -->
+
+
+  </div><!-- container Ends -->
 </div><!-- content Ends -->
 
 
@@ -89,36 +89,57 @@ include("includes/footer.php");
 <script src="js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
 
 <?php
 
-if(isset($_POST['forgot_pass'])){
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-$c_email = $_POST['c_email'];
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 
-$sel_c = "select * from customers where customer_email='$c_email'";
+if (isset($_POST['forgot_pass'])) {
 
-$run_c = mysqli_query($con,$sel_c);
+  $mail =  new PHPMailer(true);
 
-$count_c = mysqli_num_rows($run_c);
+  $mail->isSMTP();
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = ''; //insert your email
+  $mail->Password = 'uqzpvigllmyggzmu'; //see this video to find password https://www.youtube.com/watch?v=9tD8lA9foxw
+  $mail->SMTPSecure = 'ssl';
+  $mail->Port = 465;
 
-$row_c = mysqli_fetch_array($run_c);
+  $mail->setFrom(''); //insert your email
 
-$c_name = $row_c['customer_name'];
+  $mail->addAddress($_POST['c_email']);
 
-$c_pass = $row_c['customer_pass'];
 
-if($count_c == 0){
+  $c_email = $_POST['c_email'];
 
-echo "<script> alert('Sorry, We do not have your email') </script>";
+  $sel_c = "select * from customers where customer_email='$c_email'";
 
-exit();
+  $run_c = mysqli_query($con, $sel_c);
 
-}
-else{
+  $count_c = mysqli_num_rows($run_c);
 
-$message = "
+  $row_c = mysqli_fetch_array($run_c);
+
+  $c_name = $row_c['customer_name'];
+
+  $c_pass = $row_c['customer_pass'];
+
+  if ($count_c == 0) {
+
+    echo "<script> alert('Sorry, We do not have your email') </script>";
+
+    exit();
+  } else {
+
+    $message = "
 
 <h1 align='center'> Your Password Has Been Sent To You </h1>
 
@@ -141,24 +162,30 @@ Click Here To Login Your Account
 </h3>
 
 ";
+    $subject = "Your Password";
 
-$from = "2021155955@student.uitm.edu.my";
+    // $headers = "From: $from\r\n";
 
-$subject = "Your Password";
+    // $headers .= "Content-type: text/html\r\n";
 
-$headers = "From: $from\r\n";
+    $mail->isHTML(true);
 
-$headers .= "Content-type: text/html\r\n";
+    $mail->Subject = $subject;
 
-mail($c_email,$subject,$message,$headers);
+    $mail->Body = $message;
 
-echo "<script> alert('Your Password has been sent to you, check your inbox ') </script>";
+    $mail->send();
 
-echo "<script>window.open('checkout.php','_self')</script>";
+    // if( $retval == true ) {
+    //   die( "Message sent successfully...");
+    // }else {
+    //   die( "Message could not be sent...");
+    // }
+    // echo "<script> alert('Your Password has been sent to you, check your inbox ') </script>";
 
+    // echo "<script>window.open('checkout.php','_self')</script>";
 
-}
-
+  }
 }
 
 ?>
