@@ -4,9 +4,15 @@
 include("includes/db.php");
 
 
-$lol = "SELECT * FROM chatbox";
-$xcxcx = mysqli_query($con, $lol);
-$fetch_data = mysqli_fetch_all($xcxcx);
+$sql = "SELECT question FROM chatbox";
+$result = $con->query($sql);
 
+$data = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+}
 
-echo json_encode($fetch_data[0]);
+// Convert the data to JSON format
+$json_data = json_encode($data);
+echo $json_data;
+?>

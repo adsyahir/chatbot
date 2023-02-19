@@ -257,20 +257,6 @@ include("includes/db.php");
 					$msg = '<div class="user-inbox inbox"><div class="msg-header"><p>' + $name + '</p></div></div>';
 					$(".form").append($msg);
 					$("#data").val('');
-
-					$.ajax({
-						url: 'question_list.php',
-						type: 'POST',
-						success: function(result) {
-
-							var test = result.split(",")
-							console.log(test);
-
-						}
-					});
-
-
-					// start ajax code
 					$.ajax({
 						url: 'answer.php',
 						type: 'POST',
@@ -284,10 +270,28 @@ include("includes/db.php");
 
 						}
 					});
+					$.ajax({
+						url: 'question_list.php',
+						type: 'POST',
+						success: function(result) {
+
+							var data = JSON.parse(result);
+							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + result + '</p></div></div>';
+
+							for (var i = 0; i < data.length; i++) {
+								// Access the 'question' property of the current object
+								var question = data[i].question;
+								$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + question + '</p></div></div>';
+
+								$(".form").append($replay);
+							// when chat goes down the scroll bar automatically comes to the bottom
+							$(".form").scrollTop($(".form")[0].scrollHeight);
+							}
+						}
+					});
 				});
 			});
 		</script>
 
 </footer>
 
-"["Here you bank acc",[["1","Where can i get bank account number?","Here you bank acc"],["2","Where can i contact an admin?","question 2"]]]"
