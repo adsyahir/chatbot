@@ -1,0 +1,46 @@
+soalan chatbot :
+
+Where can i get bank account number?
+jawapan (Here you bank acc
+bagi maybank-166010387207 and 
+bank islam- 12300020081841 )
+
+-where can i contact an admin
+jawapan (No fon-0134633904 and email-izatimran7@gmail.com)
+
+- what is the cheapest jersey that i can get
+jawapan (ambik price jersey paling murah dalam
+table product)
+
+- Can i know what is the status of my shipping
+jawapan (Admin will contact you through 
+email and whatsapp, but further details you
+can contact admin through WhatsApp:letak no fon)
+
+- Can i get list of jersey that on sale
+jawapan (List kan jersey yang product_label=Sale)
+
+- Can i get list of New Jersey
+jawapan (List kan jersey yang product_label=New)
+
+- May i know why i cannot do an online transfer
+jawapan (Sorry, for now Beenutclo only receive an
+offline payment only)
+
+- Can know the steps to make an order
+jawapan (Sure, STEP 1: Select you desire jersey
+STEP 2: Add the jersey into the cart by clicking 
+"Add To Cart" button
+STEP 3: go to cart section then procedd to checkout
+STEP 4: Do an offline Payment
+STEP 5: After done make a transfer,insert all the
+details of the payment on the form provided
+STEP 6 : Wait untill admin contact you through
+WhatsApp and Email.
+
+- **Bila customer tanya soalan takda kena mengena
+jawapan (Sorry your not question is not relatable)
+
+- Tambah je lagi possible soalan yang logik pasal
+availability of jersey(table product)
+
