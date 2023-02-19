@@ -4,7 +4,7 @@
 include("includes/db.php");
 
 
-$sql = "SELECT question FROM chatbox";
+$sql = "SELECT id, question FROM chatbox";
 $result = $con->query($sql);
 
 $data = array();
