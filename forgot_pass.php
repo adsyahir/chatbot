@@ -109,7 +109,7 @@ if (isset($_POST['forgot_pass'])) {
   $mail->Host = 'smtp.gmail.com';
   $mail->SMTPAuth = true;
   $mail->Username = ''; //insert your email
-  $mail->Password = 'uqzpvigllmyggzmu'; //see this video to find password https://www.youtube.com/watch?v=9tD8lA9foxw
+  $mail->Password = ''; //see this video to find password https://www.youtube.com/watch?v=9tD8lA9foxw
   $mail->SMTPSecure = 'ssl';
   $mail->Port = 465;
 

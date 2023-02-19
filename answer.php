@@ -16,12 +16,11 @@ if (mysqli_num_rows($run_query) > 0) {
     $fetch_data = mysqli_fetch_assoc($run_query);
     //storing replay to a varible which we'll send to ajax
     $replay = $fetch_data['answer'];
-    // echo $replay;
 
 
-    $lol = "SELECT * FROM chatbox";
-    $xcxcx = mysqli_query($con, $lol);
-    $qlist = mysqli_fetch_all($xcxcx);
+    $data = "SELECT * FROM chatbox";
+    $get = mysqli_query($con, $data);
+    $qlist = mysqli_fetch_all($get);
 
 
     echo json_encode([$replay, $qlist]);

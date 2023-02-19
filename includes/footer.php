@@ -169,72 +169,30 @@ include("includes/db.php");
 	.typing-field .input-data button:hover {
 		background: #006fef;
 	}
+
+
+	/*  */
+
+	.question:hover {
+		display: none;
+		cursor: pointer;
+	}
+
+	/*  */
+	li {
+		list-style: none;
+	}
 </style>
 <footer class="page-footer">
 
-
-	<!-- <div class="banners">
-		<div class="container clearfix">
-
-			<div class="banner-award">
-				<span>Award winner</span><br> Fashion awards 2016
-			</div>
-
-			<div class="banner-social">
-				<a href="#" class="banner-social__link">
-				<i class="icon-facebook"></i>
-			</a>
-				<a href="#" class="banner-social__link">
-				<i class="icon-twitter"></i>
-			</a>
-				<a href="#" class="banner-social__link">
-				<i class="icon-instagram"></i>
-			</a>
-				<a href="#" class="banner-social__link">
-				<i class="icon-pinterest-circled"></i>
-			</a>
-			</div>
-
-		</div>
-	</div> -->
 	<div class="page-footer__subline">
 		<div class="container clearfix">
-			<div class="wrapper">
-				<div class="title">Simple Online Chatbot</div>
-				<div class="form">
-					<div class="bot-inbox inbox">
-						<div class="icon">
-							<i class="fas fa-user"></i>
-						</div>
-						<div class="d-flex flex-column">
-							<?php
-							$result = mysqli_query($con, "SELECT * FROM chatbox");
-							$i = 1;
-							while ($row = mysqli_fetch_array($result)) {
-							?>
-								<div class="msg-header">
-									<ul class="list-unstyled ">
 
-										<li id="<?php echo $row["question"]; ?>" class="question click" value='<?php echo $row["id"]; ?>'>
-											<p><?php echo $row["question"]; ?></p>
-										</li>
 
-									</ul>
-								</div>
-							<?php
-								$i++;
-							}
-							?>
-						</div>
-					</div>
-				</div>
-				<!-- <div class="typing-field">
-            <div class="input-data">
-                <input id="data" type="text" placeholder="Type something here.." required>
-                <button id="send-btn">Send</button>
-            </div>
-        </div> -->
-			</div>
+
+
+
+
 
 			<div class="copyright">
 				&copy; 2023 Avenue Fashion&trade;
@@ -248,61 +206,8 @@ include("includes/db.php");
 				Design by Izat Shah
 			</div>
 		</div>
-
-		<script>
-			$(document).ready(function() {
-				/* $(".question").on("click", function() { */
+	</div>
 
 
-			});
-
-
-
-			$(".question").on("click", function() {
-				$value = $(this).val();
-				$name = $(this).attr('id');
-				$msg = '<div class="user-inbox inbox"><div class="msg-header"><p>' + $name + '</p></div></div>';
-				$(".form").append($msg);
-				$("#data").val('');
-				$.ajax({
-					url: 'answer.php',
-					type: 'POST',
-					data: 'text=' + $value,
-					success: function(result) {
-
-
-						var respone_ans = JSON.parse(result);
-
-						console.log(respone_ans[1]);
-
-						$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + respone_ans[0] + '</p></div></div>';
-						$(".form").append($replay);
-						// when chat goes down the scroll bar automatically comes to the bottom
-						$(".form").scrollTop($(".form")[0].scrollHeight);
-
-						console.log('asd');
-
-
-						// Question loop
-						for (var i = 0; i < respone_ans[1].length; i++) {
-							// Access the 'question' property of the current object
-
-
-							/* 	var id = data[i].id; */
-							$list_all = `<li id="Where can i get bank account number?" class="question click" value="1">
-											<p>Where can i get bank account number?</p>
-										</li>`;
-
-							$(".form").append($list_all);
-							// when chat goes down the scroll bar automatically comes to the bottom
-							$(".form").scrollTop($(".form")[0].scrollHeight);
-
-						}
-
-
-					}
-				});
-			});
-		</script>
 
 </footer>
