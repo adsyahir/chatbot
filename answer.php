@@ -21,10 +21,10 @@ if (mysqli_num_rows($run_query) > 0) {
 
     $lol = "SELECT * FROM chatbox";
     $xcxcx = mysqli_query($con, $lol);
-    $fetch_data = mysqli_fetch_all($xcxcx);
+    $qlist = mysqli_fetch_all($xcxcx);
 
 
-    echo json_encode([$replay]);
+    echo json_encode([$replay, $qlist]);
 } else {
     echo "Sorry can't be able to understand you!";
 }

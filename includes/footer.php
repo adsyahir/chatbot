@@ -215,7 +215,7 @@ include("includes/db.php");
 								<div class="msg-header">
 									<ul class="list-unstyled ">
 
-										<li id="<?php echo $row["question"]; ?>" class="question " value='<?php echo $row["id"]; ?>'>
+										<li id="<?php echo $row["question"]; ?>" class="question click" value='<?php echo $row["id"]; ?>'>
 											<p><?php echo $row["question"]; ?></p>
 										</li>
 
@@ -251,50 +251,56 @@ include("includes/db.php");
 
 		<script>
 			$(document).ready(function() {
-				$(".question").on("click", function() {
-					$value = $(this).val();
-					$name = $(this).attr('id');
-					$msg = '<div class="user-inbox inbox"><div class="msg-header"><p>' + $name + '</p></div></div>';
-					$(".form").append($msg);
-					$("#data").val('');
-					$.ajax({
-						url: 'answer.php',
-						type: 'POST',
-						data: 'text=' + $value,
-						success: function(result) {
+				/* $(".question").on("click", function() { */
 
 
-							var respone_ans = JSON.parse(result);
+			});
 
-							console.log(respone_ans);
 
-							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + respone_ans[0] + '</p></div></div>';
-							$(".form").append($replay);
+
+			$(".question").on("click", function() {
+				$value = $(this).val();
+				$name = $(this).attr('id');
+				$msg = '<div class="user-inbox inbox"><div class="msg-header"><p>' + $name + '</p></div></div>';
+				$(".form").append($msg);
+				$("#data").val('');
+				$.ajax({
+					url: 'answer.php',
+					type: 'POST',
+					data: 'text=' + $value,
+					success: function(result) {
+
+
+						var respone_ans = JSON.parse(result);
+
+						console.log(respone_ans[1]);
+
+						$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + respone_ans[0] + '</p></div></div>';
+						$(".form").append($replay);
+						// when chat goes down the scroll bar automatically comes to the bottom
+						$(".form").scrollTop($(".form")[0].scrollHeight);
+
+						console.log('asd');
+
+
+						// Question loop
+						for (var i = 0; i < respone_ans[1].length; i++) {
+							// Access the 'question' property of the current object
+
+
+							/* 	var id = data[i].id; */
+							$list_all = `<li id="Where can i get bank account number?" class="question click" value="1">
+											<p>Where can i get bank account number?</p>
+										</li>`;
+
+							$(".form").append($list_all);
 							// when chat goes down the scroll bar automatically comes to the bottom
 							$(".form").scrollTop($(".form")[0].scrollHeight);
 
 						}
-					});
-					$.ajax({
-						url: 'question_list.php',
-						type: 'POST',
-						success: function(result) {
 
-							var data = JSON.parse(result);
-							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + result + '</p></div></div>';
 
-							for (var i = 0; i < data.length; i++) {
-								// Access the 'question' property of the current object
-								var question = data[i].question;
-								var id = data[i].id;
-								$replay = `<li class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><li id="${id}"  class="question"><p>${question}</p></li></li>`;
-
-								$(".form").append($replay);
-								// when chat goes down the scroll bar automatically comes to the bottom
-								$(".form").scrollTop($(".form")[0].scrollHeight);
-							}
-						}
-					});
+					}
 				});
 			});
 		</script>
