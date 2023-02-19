@@ -262,8 +262,13 @@ include("includes/db.php");
 						type: 'POST',
 						data: 'text=' + $value,
 						success: function(result) {
-							console.log(result);
-							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + result + '</p></div></div>';
+
+
+							var respone_ans = JSON.parse(result);
+
+							console.log(respone_ans);
+
+							$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + respone_ans[0] + '</p></div></div>';
 							$(".form").append($replay);
 							// when chat goes down the scroll bar automatically comes to the bottom
 							$(".form").scrollTop($(".form")[0].scrollHeight);
@@ -284,8 +289,8 @@ include("includes/db.php");
 								$replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + question + '</p></div></div>';
 
 								$(".form").append($replay);
-							// when chat goes down the scroll bar automatically comes to the bottom
-							$(".form").scrollTop($(".form")[0].scrollHeight);
+								// when chat goes down the scroll bar automatically comes to the bottom
+								$(".form").scrollTop($(".form")[0].scrollHeight);
 							}
 						}
 					});
@@ -294,4 +299,3 @@ include("includes/db.php");
 		</script>
 
 </footer>
-

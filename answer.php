@@ -1,4 +1,4 @@
-<!-- Created By CodingNepal -->
+ 
 <?php
 // connecting to database
 include("includes/db.php");
@@ -24,7 +24,7 @@ if (mysqli_num_rows($run_query) > 0) {
     $fetch_data = mysqli_fetch_all($xcxcx);
 
 
-    echo json_encode([$replay, $fetch_data]);
+    echo json_encode([$replay]);
 } else {
     echo "Sorry can't be able to understand you!";
 }
